@@ -12,6 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as StudioRouteImport } from './routes/studio'
 import { Route as AiRouteImport } from './routes/ai'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiFetchTiktokRouteImport } from './routes/api/fetch-tiktok'
+import { Route as ApiAiEditRouteImport } from './routes/api/ai-edit'
+import { Route as ApiAiChatRouteImport } from './routes/api/ai-chat'
 
 const StudioRoute = StudioRouteImport.update({
   id: '/studio',
@@ -28,35 +31,81 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiFetchTiktokRoute = ApiFetchTiktokRouteImport.update({
+  id: '/api/fetch-tiktok',
+  path: '/api/fetch-tiktok',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiEditRoute = ApiAiEditRouteImport.update({
+  id: '/api/ai-edit',
+  path: '/api/ai-edit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiChatRoute = ApiAiChatRouteImport.update({
+  id: '/api/ai-chat',
+  path: '/api/ai-chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ai': typeof AiRoute
   '/studio': typeof StudioRoute
+  '/api/ai-chat': typeof ApiAiChatRoute
+  '/api/ai-edit': typeof ApiAiEditRoute
+  '/api/fetch-tiktok': typeof ApiFetchTiktokRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ai': typeof AiRoute
   '/studio': typeof StudioRoute
+  '/api/ai-chat': typeof ApiAiChatRoute
+  '/api/ai-edit': typeof ApiAiEditRoute
+  '/api/fetch-tiktok': typeof ApiFetchTiktokRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/ai': typeof AiRoute
   '/studio': typeof StudioRoute
+  '/api/ai-chat': typeof ApiAiChatRoute
+  '/api/ai-edit': typeof ApiAiEditRoute
+  '/api/fetch-tiktok': typeof ApiFetchTiktokRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ai' | '/studio'
+  fullPaths:
+    | '/'
+    | '/ai'
+    | '/studio'
+    | '/api/ai-chat'
+    | '/api/ai-edit'
+    | '/api/fetch-tiktok'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ai' | '/studio'
-  id: '__root__' | '/' | '/ai' | '/studio'
+  to:
+    | '/'
+    | '/ai'
+    | '/studio'
+    | '/api/ai-chat'
+    | '/api/ai-edit'
+    | '/api/fetch-tiktok'
+  id:
+    | '__root__'
+    | '/'
+    | '/ai'
+    | '/studio'
+    | '/api/ai-chat'
+    | '/api/ai-edit'
+    | '/api/fetch-tiktok'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AiRoute: typeof AiRoute
   StudioRoute: typeof StudioRoute
+  ApiAiChatRoute: typeof ApiAiChatRoute
+  ApiAiEditRoute: typeof ApiAiEditRoute
+  ApiFetchTiktokRoute: typeof ApiFetchTiktokRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +131,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/fetch-tiktok': {
+      id: '/api/fetch-tiktok'
+      path: '/api/fetch-tiktok'
+      fullPath: '/api/fetch-tiktok'
+      preLoaderRoute: typeof ApiFetchTiktokRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai-edit': {
+      id: '/api/ai-edit'
+      path: '/api/ai-edit'
+      fullPath: '/api/ai-edit'
+      preLoaderRoute: typeof ApiAiEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai-chat': {
+      id: '/api/ai-chat'
+      path: '/api/ai-chat'
+      fullPath: '/api/ai-chat'
+      preLoaderRoute: typeof ApiAiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +159,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AiRoute: AiRoute,
   StudioRoute: StudioRoute,
+  ApiAiChatRoute: ApiAiChatRoute,
+  ApiAiEditRoute: ApiAiEditRoute,
+  ApiFetchTiktokRoute: ApiFetchTiktokRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
