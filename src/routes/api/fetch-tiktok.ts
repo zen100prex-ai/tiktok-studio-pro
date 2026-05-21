@@ -10,7 +10,6 @@ export const Route = createFileRoute("/api/fetch-tiktok")({
           if (!url || typeof url !== "string") {
             return Response.json({ error: "Missing url" }, { status: 400 });
           }
-          // tikwm.com — free public endpoint, no key, returns watermark-free MP4
           const res = await fetch("https://www.tikwm.com/api/", {
             method: "POST",
             headers: { "content-type": "application/x-www-form-urlencoded" },
