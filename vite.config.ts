@@ -1,5 +1,5 @@
-// Vercel deployment using Nitro adapter + TanStack Start
-// Based on official TanStack Start examples/react/start-basic pattern
+// Standard TanStack Start + Nitro Vercel adapter
+// Uses exact same package versions as original project (no bun age-guard issues)
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import { defineConfig } from 'vite'
 import viteReact from '@vitejs/plugin-react'
@@ -11,9 +11,7 @@ export default defineConfig({
   plugins: [
     tsConfigPaths({ projects: ['./tsconfig.json'] }),
     tailwindcss(),
-    tanstackStart({
-      srcDirectory: 'src',
-    }),
+    tanstackStart(),
     viteReact(),
     nitro({ preset: 'vercel' }),
   ],
